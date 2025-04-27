@@ -86,30 +86,37 @@ int getspeed(char data[128])
 void motor_ctrl(char data[4])
 {
     if(strcmp(data,"goto") == 0){
+        ccr_r = ccr_l = ccr;
         HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
     }
     else if(strcmp(data, "back") == 0){
+        ccr_r = ccr_l = ccr;
         HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_SET);
     }
     else if(strcmp(data , "stop") == 0){
+        ccr_r = ccr_l = ccr;
         HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
     }
     else if(strcmp(data , "left") == 0){
+        ccr_l = ccr / 2;
+        ccr_r = ccr;
         HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
     }
     else if(strcmp(data , "righ") == 0){
+        ccr_l = ccr;
+        ccr_r = ccr / 2;
         HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_RESET);
@@ -121,22 +128,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     if(htim == &htim7)
     {
         count++;
-        if(count == ccr)
+        if(count == ccr_l)
         {
             HAL_GPIO_WritePin(GPIOD,GPIO_PIN_4,GPIO_PIN_RESET);
-            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_RESET);
-            USART1_Print("SET");
+//          USART1_Print("SET");
         }
-//        if (count == ccr_r)
-//        {
-//            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_RESET);
-//        }
-        else if (count == MAXCCR)
+        else if(count == ccr_r)
+        {
+            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_RESET);
+        }
+        else if (count >= MAXCCR)
         {
             HAL_GPIO_WritePin(GPIOD,GPIO_PIN_4,GPIO_PIN_SET);
             HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_SET);
             count = 0;
-            USART1_Print("RESET");
+//            USART1_Print("RESET");
         }
     }
 }
@@ -192,14 +198,88 @@ int main(void)
   /* USER CODE BEGIN 2 */
     HAL_UARTEx_ReceiveToIdle_DMA( &huart1, ReceiveData, 128);
     HAL_TIM_Base_Start_IT(&htim7);
+
+
+    ccr = 300;
+    motor_ctrl("goto");
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-      USART1_Print("111");
-      HAL_Delay(500);
+
+
+//      if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_SET)
+//      {
+//
+//          motor_ctrl("goto");
+//          USART1_Print("SET");
+//      }
+//      else if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
+//      {
+//          motor_ctrl("left");
+//          HAL_Delay(500);
+//          if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
+//          {
+//              motor_ctrl("left");
+//          }
+//          else
+//          {
+//              motor_ctrl("goto");
+//          }
+//          USART1_Print("RESET");
+//      }
+      if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_SET)
+      {
+
+          motor_ctrl("goto");
+          USART1_Print("SET");
+      }
+      else if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
+      {
+          motor_ctrl("stop");
+          HAL_Delay(500);
+          motor_ctrl("back");
+          HAL_Delay(500);
+          motor_ctrl("left");
+          HAL_Delay(1000);
+          if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
+          {
+              motor_ctrl("left");
+          }
+          else
+          {
+              motor_ctrl("goto");
+          }
+          USART1_Print("RESET");
+      }
+      if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_2) == GPIO_PIN_SET)
+      {
+
+          motor_ctrl("goto");
+          USART1_Print("SET");
+      }
+      else if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_2) == GPIO_PIN_RESET)
+      {
+          motor_ctrl("stop");
+          HAL_Delay(500);
+          motor_ctrl("back");
+          HAL_Delay(500);
+          motor_ctrl("righ");
+          HAL_Delay(1000);
+          if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_2) == GPIO_PIN_RESET)
+          {
+              motor_ctrl("righ");
+          }
+          else
+          {
+              motor_ctrl("goto");
+          }
+         USART1_Print("RESET");
+      }
+      HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
+      HAL_Delay(50);
 //      ccr = 300;
 //      motor_ctrl("goto");
 //      HAL_Delay(2000);
