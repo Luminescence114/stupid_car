@@ -105,19 +105,18 @@ void mode_menu(char mode)
                 USART1_Print("stop");
             }
             break;
-        case COMM_CHANGE:
-            mode_flag *= -1;
-            USART1_Print("change");
-            if(mode_flag == 1)
-            {
-                motor_ctrl("stop",0);
-            }
-            break;
+//        case COMM_CHANGE:
+//            mode_flag *= -1;
+//            USART1_Print("change");
+//            if(mode_flag == 1)
+//            {
+//                motor_ctrl("stop",0);
+//            }
+//            break;
         default :
             break;
     }
 }
-
 /* USER CODE END 0 */
 
 /**
@@ -168,11 +167,14 @@ int main(void)
           ir_rec_flag = 0;
           mode_menu(ctrl_comm);
       }
-      else if(mode_flag == -1)
+      if(mode_flag == -1)
       {
           Avoid_obstacle();
       }
-
+      if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_8) == GPIO_PIN_SET)
+      {
+          USART1_Print("FUCK");
+      }
       HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
       HAL_Delay(50);
     /* USER CODE END WHILE */

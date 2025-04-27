@@ -50,9 +50,9 @@ else ()
 endif ()
 
 include_directories(Core/Inc Drivers/STM32F1xx_HAL_Driver/Inc Drivers/STM32F1xx_HAL_Driver/Inc/Legacy Drivers/CMSIS/Device/ST/STM32F1xx/Include Drivers/CMSIS/Include
-    Core/Hardware/M_UART
-    Core/Hardware/M_IR
-    Core/Hardware/M_MOTOR)
+        Core/Hardware/M_UART
+        Core/Hardware/M_IR
+        Core/Hardware/M_MOTOR)
 
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE)
 

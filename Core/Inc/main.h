@@ -65,6 +65,12 @@ void Error_Handler(void);
 #define IRIN_Pin GPIO_PIN_10
 #define IRIN_GPIO_Port GPIOD
 #define IRIN_EXTI_IRQn EXTI15_10_IRQn
+#define TRACE_R_Pin GPIO_PIN_4
+#define TRACE_R_GPIO_Port GPIOG
+#define TRACE_L_Pin GPIO_PIN_6
+#define TRACE_L_GPIO_Port GPIOG
+#define TRACE_M_Pin GPIO_PIN_8
+#define TRACE_M_GPIO_Port GPIOG
 
 /* USER CODE BEGIN Private defines */
 
