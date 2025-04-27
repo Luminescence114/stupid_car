@@ -8,6 +8,23 @@ CMake Deprecation Warning:
   use the cmake-file-api(7) to view CMake-generated project build trees.
 
 
+-- Minimal optimization, debug info included
+-- Configuring done (0.2s)
+You have changed variables that require your cache to be deleted.
+Configure will be re-run and you may have to reset some variables.
+The following variables have changed:
+CMAKE_C_COMPILER= D:/CLion_Tools/10 2021.10/bin/arm-none-eabi-gcc.exe
+CMAKE_CXX_COMPILER= D:/CLion_Tools/10 2021.10/bin/arm-none-eabi-g++.exe
+
+CMake Deprecation Warning:
+  Support for "Extra Generators" like
+
+    CodeBlocks
+
+  is deprecated and will be removed from a future version of CMake.  IDEs may
+  use the cmake-file-api(7) to view CMake-generated project build trees.
+
+
 -- The C compiler identification is GNU 13.3.1
 -- The CXX compiler identification is GNU 13.3.1
 -- The ASM compiler identification is GNU
@@ -23,6 +40,6 @@ CMake Deprecation Warning:
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Minimal optimization, debug info included
--- Configuring done (2.3s)
+-- Configuring done (2.0s)
 -- Generating done (0.1s)
 -- Build files have been written to: D:/stm32/stm32cube/projects/myCAR111/cmake-build-debug

@@ -52,10 +52,10 @@ CMakeFiles/myCAR111.elf.dir/Core/Src/main.c.obj: \
  D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/machine/_types.h \
  D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/lock.h \
  D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/stdio.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/stdlib.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/machine/stdlib.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/alloca.h \
  D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/string.h \
  D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/_locale.h \
  D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/strings.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/string.h
+ D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/string.h \
+ D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_UART/M_UART.h \
+ D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_IR/M_IR.h \
+ D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_MOTOR/M_MOTOR.h

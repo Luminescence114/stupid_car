@@ -26,10 +26,16 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "D:/stm32/stm32cube/projects/myCAR111/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"
   "D:/stm32/stm32cube/projects/myCAR111/Drivers/CMSIS/Device/ST/STM32F1xx/Include"
   "D:/stm32/stm32cube/projects/myCAR111/Drivers/CMSIS/Include"
+  "D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_UART"
+  "D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_IR"
+  "D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_MOTOR"
   )
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_IR/M_IR.c" "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_IR/M_IR.c.obj" "gcc" "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_IR/M_IR.c.obj.d"
+  "D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_MOTOR/M_MOTOR.c" "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_MOTOR/M_MOTOR.c.obj" "gcc" "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_MOTOR/M_MOTOR.c.obj.d"
+  "D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_UART/M_UART.c" "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_UART/M_UART.c.obj" "gcc" "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_UART/M_UART.c.obj.d"
   "D:/stm32/stm32cube/projects/myCAR111/Core/Src/dma.c" "CMakeFiles/myCAR111.elf.dir/Core/Src/dma.c.obj" "gcc" "CMakeFiles/myCAR111.elf.dir/Core/Src/dma.c.obj.d"
   "D:/stm32/stm32cube/projects/myCAR111/Core/Src/gpio.c" "CMakeFiles/myCAR111.elf.dir/Core/Src/gpio.c.obj" "gcc" "CMakeFiles/myCAR111.elf.dir/Core/Src/gpio.c.obj.d"
   "D:/stm32/stm32cube/projects/myCAR111/Core/Src/main.c" "CMakeFiles/myCAR111.elf.dir/Core/Src/main.c.obj" "gcc" "CMakeFiles/myCAR111.elf.dir/Core/Src/main.c.obj.d"

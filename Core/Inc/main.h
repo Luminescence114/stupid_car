@@ -36,7 +36,12 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-
+#define DATA_SIZE 64
+extern int speed;
+extern int ccr_l;
+extern int ccr_r;
+extern int count;
+extern char ReceiveData[DATA_SIZE];
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -57,6 +62,9 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define IRIN_Pin GPIO_PIN_10
+#define IRIN_GPIO_Port GPIOD
+#define IRIN_EXTI_IRQn EXTI15_10_IRQn
 
 /* USER CODE BEGIN Private defines */
 

@@ -32,6 +32,9 @@
 					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
 					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
 					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Drivers/CMSIS/Include"/>
+					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_UART"/>
+					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_IR"/>
+					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_MOTOR"/>
 					<Add directory="D:/CLion_Tools/arm-none-eabi/13.3 rel1/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1"/>
 					<Add directory="D:/CLion_Tools/arm-none-eabi/13.3 rel1/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/arm-none-eabi"/>
 					<Add directory="D:/CLion_Tools/arm-none-eabi/13.3 rel1/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/backward"/>
@@ -61,6 +64,9 @@
 					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy"/>
 					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Drivers/CMSIS/Device/ST/STM32F1xx/Include"/>
 					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Drivers/CMSIS/Include"/>
+					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_UART"/>
+					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_IR"/>
+					<Add directory="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_MOTOR"/>
 					<Add directory="D:/CLion_Tools/arm-none-eabi/13.3 rel1/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1"/>
 					<Add directory="D:/CLion_Tools/arm-none-eabi/13.3 rel1/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/arm-none-eabi"/>
 					<Add directory="D:/CLion_Tools/arm-none-eabi/13.3 rel1/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/backward"/>
@@ -96,6 +102,24 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_IR/M_IR.c">
+			<Option target="myCAR111.elf"/>
+		</Unit>
+		<Unit filename="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_IR/M_IR.h">
+			<Option target="myCAR111.elf"/>
+		</Unit>
+		<Unit filename="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_MOTOR/M_MOTOR.c">
+			<Option target="myCAR111.elf"/>
+		</Unit>
+		<Unit filename="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_MOTOR/M_MOTOR.h">
+			<Option target="myCAR111.elf"/>
+		</Unit>
+		<Unit filename="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_UART/M_UART.c">
+			<Option target="myCAR111.elf"/>
+		</Unit>
+		<Unit filename="D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_UART/M_UART.h">
+			<Option target="myCAR111.elf"/>
+		</Unit>
 		<Unit filename="D:/stm32/stm32cube/projects/myCAR111/Core/Inc/dma.h">
 			<Option target="myCAR111.elf"/>
 		</Unit>

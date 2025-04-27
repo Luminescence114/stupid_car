@@ -5,13 +5,13 @@
 # compile C with D:/CLion_Tools/arm-none-eabi/13.3 rel1/bin/arm-none-eabi-gcc.exe
 ASM_DEFINES = -DDEBUG -DSTM32F103xE -DUSE_HAL_DRIVER
 
-ASM_INCLUDES = -ID:\stm32\stm32cube\projects\myCAR111\Core\Inc -ID:\stm32\stm32cube\projects\myCAR111\Drivers\STM32F1xx_HAL_Driver\Inc -ID:\stm32\stm32cube\projects\myCAR111\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy -ID:\stm32\stm32cube\projects\myCAR111\Drivers\CMSIS\Device\ST\STM32F1xx\Include -ID:\stm32\stm32cube\projects\myCAR111\Drivers\CMSIS\Include
+ASM_INCLUDES = -ID:\stm32\stm32cube\projects\myCAR111\Core\Inc -ID:\stm32\stm32cube\projects\myCAR111\Drivers\STM32F1xx_HAL_Driver\Inc -ID:\stm32\stm32cube\projects\myCAR111\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy -ID:\stm32\stm32cube\projects\myCAR111\Drivers\CMSIS\Device\ST\STM32F1xx\Include -ID:\stm32\stm32cube\projects\myCAR111\Drivers\CMSIS\Include -ID:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_UART -ID:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_IR -ID:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_MOTOR
 
-ASM_FLAGS = -g -mcpu=cortex-m3 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -x assembler-with-cpp -Og -g
+ASM_FLAGS = -mcpu=cortex-m3 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -x assembler-with-cpp -Og -g
 
 C_DEFINES = -DDEBUG -DSTM32F103xE -DUSE_HAL_DRIVER
 
-C_INCLUDES = -ID:\stm32\stm32cube\projects\myCAR111\Core\Inc -ID:\stm32\stm32cube\projects\myCAR111\Drivers\STM32F1xx_HAL_Driver\Inc -ID:\stm32\stm32cube\projects\myCAR111\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy -ID:\stm32\stm32cube\projects\myCAR111\Drivers\CMSIS\Device\ST\STM32F1xx\Include -ID:\stm32\stm32cube\projects\myCAR111\Drivers\CMSIS\Include
+C_INCLUDES = -ID:\stm32\stm32cube\projects\myCAR111\Core\Inc -ID:\stm32\stm32cube\projects\myCAR111\Drivers\STM32F1xx_HAL_Driver\Inc -ID:\stm32\stm32cube\projects\myCAR111\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy -ID:\stm32\stm32cube\projects\myCAR111\Drivers\CMSIS\Device\ST\STM32F1xx\Include -ID:\stm32\stm32cube\projects\myCAR111\Drivers\CMSIS\Include -ID:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_UART -ID:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_IR -ID:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_MOTOR
 
-C_FLAGS = -g -std=gnu11 -fdiagnostics-color=always -mcpu=cortex-m3 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -Og -g
+C_FLAGS = -std=gnu11 -fdiagnostics-color=always -mcpu=cortex-m3 -mthumb -mthumb-interwork -ffunction-sections -fdata-sections -fno-common -fmessage-length=0 -Og -g
 

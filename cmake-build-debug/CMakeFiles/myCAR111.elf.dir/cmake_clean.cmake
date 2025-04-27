@@ -1,4 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_IR/M_IR.c.obj"
+  "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_IR/M_IR.c.obj.d"
+  "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_MOTOR/M_MOTOR.c.obj"
+  "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_MOTOR/M_MOTOR.c.obj.d"
+  "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_UART/M_UART.c.obj"
+  "CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_UART/M_UART.c.obj.d"
   "CMakeFiles/myCAR111.elf.dir/Core/Src/dma.c.obj"
   "CMakeFiles/myCAR111.elf.dir/Core/Src/dma.c.obj.d"
   "CMakeFiles/myCAR111.elf.dir/Core/Src/gpio.c.obj"

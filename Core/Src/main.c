@@ -26,9 +26,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
-#include "stdlib.h"
-#include "stdarg.h"
 #include "string.h"
+#include "M_UART.h"
+#include "M_IR.h"
+#include "M_MOTOR.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -38,7 +39,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MAXCCR 1000
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,11 +50,12 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-char ReceiveData[128] = "";
+char ReceiveData[DATA_SIZE] = "";
 int count = 0;
-int ccr = 500;
+int speed = 0;
 int ccr_l = 0;
 int ccr_r = 0;
+int mode_flag =1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -64,103 +66,58 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void USART1_Print(char *fmt, ...)
+void mode_menu(char mode)
 {
-    uint8_t buf[128];
-    uint16_t len;
-    va_list ap;
-    va_start(ap, fmt);
-    len = vsnprintf((char *)buf,128, fmt, ap);
-    va_end(ap);
-    HAL_UART_Transmit(&huart1, buf, len, 100);
-}
-int getspeed(char data[128])
-{
-    char temp[3];
-    temp[0] = data[5];
-    temp[1] = data[6];
-    temp[2] = data[7];
-    int speed = atoi(temp);
-    return speed;
-}
-void motor_ctrl(char data[4])
-{
-    if(strcmp(data,"goto") == 0){
-        ccr_r = ccr_l = ccr;
-        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
-    }
-    else if(strcmp(data, "back") == 0){
-        ccr_r = ccr_l = ccr;
-        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_SET);
-    }
-    else if(strcmp(data , "stop") == 0){
-        ccr_r = ccr_l = ccr;
-        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
-    }
-    else if(strcmp(data , "left") == 0){
-        ccr_l = ccr / 2;
-        ccr_r = ccr;
-        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
-    }
-    else if(strcmp(data , "righ") == 0){
-        ccr_l = ccr;
-        ccr_r = ccr / 2;
-        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
-    }
-}
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-    if(htim == &htim7)
+    switch (mode)
     {
-        count++;
-        if(count == ccr_l)
-        {
-            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_4,GPIO_PIN_RESET);
-//          USART1_Print("SET");
-        }
-        else if(count == ccr_r)
-        {
-            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_RESET);
-        }
-        else if (count >= MAXCCR)
-        {
-            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_4,GPIO_PIN_SET);
-            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_SET);
-            count = 0;
-//            USART1_Print("RESET");
-        }
+        case COMM_UP:
+            if(mode_flag == 1)
+            {
+                motor_ctrl("goto",500);
+                USART1_Print("up");
+            }
+            break;
+        case COMM_DOWN:
+            if(mode_flag == 1)
+            {
+                motor_ctrl("back",500);
+                USART1_Print("down");
+            }
+            break;
+        case COMM_LEFT:
+            if(mode_flag == 1)
+            {
+                motor_ctrl("left",500);
+                USART1_Print("left");
+            }
+            break;
+        case COMM_RIGHT:
+            if(mode_flag == 1)
+            {
+                motor_ctrl("righ",500);
+                USART1_Print("right");
+            }
+            break;
+        case COMM_STOP:
+            if(mode_flag == 1)
+            {
+                motor_ctrl("stop",0);
+                USART1_Print("stop");
+            }
+            break;
+        case COMM_CHANGE:
+            mode_flag *= -1;
+            USART1_Print("change");
+            if(mode_flag == 1)
+            {
+                motor_ctrl("stop",0);
+            }
+            break;
+        default :
+            break;
     }
 }
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
-{
-    char info[4];
-    info[0] = ReceiveData[0];
-    info[1] = ReceiveData[1];
-    info[2] = ReceiveData[2];
-    info[3] = ReceiveData[3];
-    if(strlen(ReceiveData) == 8)
-        ccr = getspeed(ReceiveData);
-    motor_ctrl(info);
 
-    USART1_Print("%s",ReceiveData);
-    memset(ReceiveData, 0, sizeof(ReceiveData));
-    HAL_UARTEx_ReceiveToIdle_DMA ( &huart1, ReceiveData, 128);
-}
 /* USER CODE END 0 */
 
 /**
@@ -195,109 +152,29 @@ int main(void)
   MX_DMA_Init();
   MX_TIM7_Init();
   MX_USART1_UART_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
-    HAL_UARTEx_ReceiveToIdle_DMA( &huart1, ReceiveData, 128);
+    HAL_UARTEx_ReceiveToIdle_DMA( &huart1, ReceiveData, DATA_SIZE);
     HAL_TIM_Base_Start_IT(&htim7);
 
-
-    ccr = 300;
-    motor_ctrl("goto");
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-
-//      if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_SET)
-//      {
-//
-//          motor_ctrl("goto");
-//          USART1_Print("SET");
-//      }
-//      else if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
-//      {
-//          motor_ctrl("left");
-//          HAL_Delay(500);
-//          if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
-//          {
-//              motor_ctrl("left");
-//          }
-//          else
-//          {
-//              motor_ctrl("goto");
-//          }
-//          USART1_Print("RESET");
-//      }
-      if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_SET)
+      if(ir_rec_flag == 1)
       {
+          ir_rec_flag = 0;
+          mode_menu(ctrl_comm);
+      }
+      else if(mode_flag == -1)
+      {
+          Avoid_obstacle();
+      }
 
-          motor_ctrl("goto");
-          USART1_Print("SET");
-      }
-      else if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
-      {
-          motor_ctrl("stop");
-          HAL_Delay(500);
-          motor_ctrl("back");
-          HAL_Delay(500);
-          motor_ctrl("left");
-          HAL_Delay(1000);
-          if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
-          {
-              motor_ctrl("left");
-          }
-          else
-          {
-              motor_ctrl("goto");
-          }
-          USART1_Print("RESET");
-      }
-      if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_2) == GPIO_PIN_SET)
-      {
-
-          motor_ctrl("goto");
-          USART1_Print("SET");
-      }
-      else if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_2) == GPIO_PIN_RESET)
-      {
-          motor_ctrl("stop");
-          HAL_Delay(500);
-          motor_ctrl("back");
-          HAL_Delay(500);
-          motor_ctrl("righ");
-          HAL_Delay(1000);
-          if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_2) == GPIO_PIN_RESET)
-          {
-              motor_ctrl("righ");
-          }
-          else
-          {
-              motor_ctrl("goto");
-          }
-         USART1_Print("RESET");
-      }
       HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
       HAL_Delay(50);
-//      ccr = 300;
-//      motor_ctrl("goto");
-//      HAL_Delay(2000);
-//      ccr = 700;
-//      HAL_Delay(1000);
-//      ccr = 0;
-//      motor_ctrl("stop");
-//      HAL_Delay(1000);
-//      ccr = 400;
-//      motor_ctrl("back");
-//      HAL_Delay(1000);
-//      motor_ctrl("stop");
-//      HAL_Delay(1000);
-//      ccr = 400;
-//      motor_ctrl("left");
-//      HAL_Delay(1000);
-//      motor_ctrl("righ");
-//      HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

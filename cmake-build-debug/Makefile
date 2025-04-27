@@ -135,6 +135,78 @@ myCAR111.elf/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/build
 .PHONY : myCAR111.elf/fast
 
+Core/Hardware/M_IR/M_IR.obj: Core/Hardware/M_IR/M_IR.c.obj
+.PHONY : Core/Hardware/M_IR/M_IR.obj
+
+# target to build an object file
+Core/Hardware/M_IR/M_IR.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_IR/M_IR.c.obj
+.PHONY : Core/Hardware/M_IR/M_IR.c.obj
+
+Core/Hardware/M_IR/M_IR.i: Core/Hardware/M_IR/M_IR.c.i
+.PHONY : Core/Hardware/M_IR/M_IR.i
+
+# target to preprocess a source file
+Core/Hardware/M_IR/M_IR.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_IR/M_IR.c.i
+.PHONY : Core/Hardware/M_IR/M_IR.c.i
+
+Core/Hardware/M_IR/M_IR.s: Core/Hardware/M_IR/M_IR.c.s
+.PHONY : Core/Hardware/M_IR/M_IR.s
+
+# target to generate assembly for a file
+Core/Hardware/M_IR/M_IR.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_IR/M_IR.c.s
+.PHONY : Core/Hardware/M_IR/M_IR.c.s
+
+Core/Hardware/M_MOTOR/M_MOTOR.obj: Core/Hardware/M_MOTOR/M_MOTOR.c.obj
+.PHONY : Core/Hardware/M_MOTOR/M_MOTOR.obj
+
+# target to build an object file
+Core/Hardware/M_MOTOR/M_MOTOR.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_MOTOR/M_MOTOR.c.obj
+.PHONY : Core/Hardware/M_MOTOR/M_MOTOR.c.obj
+
+Core/Hardware/M_MOTOR/M_MOTOR.i: Core/Hardware/M_MOTOR/M_MOTOR.c.i
+.PHONY : Core/Hardware/M_MOTOR/M_MOTOR.i
+
+# target to preprocess a source file
+Core/Hardware/M_MOTOR/M_MOTOR.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_MOTOR/M_MOTOR.c.i
+.PHONY : Core/Hardware/M_MOTOR/M_MOTOR.c.i
+
+Core/Hardware/M_MOTOR/M_MOTOR.s: Core/Hardware/M_MOTOR/M_MOTOR.c.s
+.PHONY : Core/Hardware/M_MOTOR/M_MOTOR.s
+
+# target to generate assembly for a file
+Core/Hardware/M_MOTOR/M_MOTOR.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_MOTOR/M_MOTOR.c.s
+.PHONY : Core/Hardware/M_MOTOR/M_MOTOR.c.s
+
+Core/Hardware/M_UART/M_UART.obj: Core/Hardware/M_UART/M_UART.c.obj
+.PHONY : Core/Hardware/M_UART/M_UART.obj
+
+# target to build an object file
+Core/Hardware/M_UART/M_UART.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_UART/M_UART.c.obj
+.PHONY : Core/Hardware/M_UART/M_UART.c.obj
+
+Core/Hardware/M_UART/M_UART.i: Core/Hardware/M_UART/M_UART.c.i
+.PHONY : Core/Hardware/M_UART/M_UART.i
+
+# target to preprocess a source file
+Core/Hardware/M_UART/M_UART.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_UART/M_UART.c.i
+.PHONY : Core/Hardware/M_UART/M_UART.c.i
+
+Core/Hardware/M_UART/M_UART.s: Core/Hardware/M_UART/M_UART.c.s
+.PHONY : Core/Hardware/M_UART/M_UART.s
+
+# target to generate assembly for a file
+Core/Hardware/M_UART/M_UART.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\myCAR111.elf.dir\build.make CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_UART/M_UART.c.s
+.PHONY : Core/Hardware/M_UART/M_UART.c.s
+
 Core/Src/dma.obj: Core/Src/dma.c.obj
 .PHONY : Core/Src/dma.obj
 
@@ -729,6 +801,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... myCAR111.elf
+	@echo ... Core/Hardware/M_IR/M_IR.obj
+	@echo ... Core/Hardware/M_IR/M_IR.i
+	@echo ... Core/Hardware/M_IR/M_IR.s
+	@echo ... Core/Hardware/M_MOTOR/M_MOTOR.obj
+	@echo ... Core/Hardware/M_MOTOR/M_MOTOR.i
+	@echo ... Core/Hardware/M_MOTOR/M_MOTOR.s
+	@echo ... Core/Hardware/M_UART/M_UART.obj
+	@echo ... Core/Hardware/M_UART/M_UART.i
+	@echo ... Core/Hardware/M_UART/M_UART.s
 	@echo ... Core/Src/dma.obj
 	@echo ... Core/Src/dma.i
 	@echo ... Core/Src/dma.s
