@@ -105,16 +105,64 @@ void mode_menu(char mode)
                 USART1_Print("stop");
             }
             break;
-//        case COMM_CHANGE:
-//            mode_flag *= -1;
-//            USART1_Print("change");
-//            if(mode_flag == 1)
-//            {
-//                motor_ctrl("stop",0);
-//            }
-//            break;
+        case COMM_CHANGE:
+            USART1_Print("change");
+            if(mode_flag == 1)
+            {
+                mode_flag++;
+                motor_ctrl("stop",0);
+            }
+            else if(mode_flag == 2)
+            {
+                mode_flag++;
+                motor_ctrl("stop",0);
+            }
+            else if(mode_flag >= 3)
+            {
+                mode_flag = 1;
+                motor_ctrl("stop",0);
+            }
+            break;
         default :
             break;
+    }
+}
+
+void auto_trace(void)
+{
+    if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_SET
+       && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET
+       && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
+    {
+        motor_ctrl("goto",400);//中间
+    }
+    else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_RESET
+            && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET
+            && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_SET)
+    {
+        motor_ctrl("left",200);//偏右
+    }
+    else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_SET
+            && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET
+            && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_SET)
+    {
+        motor_ctrl("left",350);//很右
+    }
+    else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_RESET
+            && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_SET
+            && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
+    {
+        motor_ctrl("righ",200);//偏左
+    }
+    else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_SET
+            && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_SET
+            && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
+    {
+        motor_ctrl("righ",350);//很左
+    }
+    else
+    {
+        motor_ctrl("goto",200);
     }
 }
 /* USER CODE END 0 */
@@ -166,17 +214,24 @@ int main(void)
       {
           ir_rec_flag = 0;
           mode_menu(ctrl_comm);
+          HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
+          HAL_Delay(50);
       }
-      if(mode_flag == -1)
+      if(mode_flag == 2)
+      {
+          auto_trace();
+          HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
+          HAL_Delay(10);
+      }
+      else if(mode_flag == 3)
       {
           Avoid_obstacle();
+          HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
+          HAL_Delay(50);
       }
-      if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_8) == GPIO_PIN_SET)
-      {
-          USART1_Print("FUCK");
-      }
-      HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-      HAL_Delay(50);
+
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
