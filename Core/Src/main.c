@@ -39,7 +39,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define FORWORDSPEED 250
+#define FORWORDSPEED 300
 #define COMPEN 22
 /* USER CODE END PD */
 
@@ -144,7 +144,7 @@ void auto_trace(void)
             && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET
             && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_SET)
     {
-        motor_ctrl(FORWORDSPEED - COMPEN + 600,FORWORDSPEED + COMPEN - 600);//很左
+        motor_ctrl(FORWORDSPEED - COMPEN + 500,FORWORDSPEED + COMPEN - 500);//很左
         USART1_Print("111");
         outline_flag = 1;
     }
@@ -152,7 +152,7 @@ void auto_trace(void)
             && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET
             && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_SET)
     {
-        motor_ctrl(FORWORDSPEED - COMPEN + 300,FORWORDSPEED + COMPEN - 300);//偏左
+        motor_ctrl(FORWORDSPEED - COMPEN + 250,FORWORDSPEED + COMPEN - 250);//偏左
         outline_flag = 1;
 
     }
@@ -160,7 +160,7 @@ void auto_trace(void)
             && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_SET
             && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
     {
-        motor_ctrl(FORWORDSPEED - COMPEN - 600,FORWORDSPEED + COMPEN + 600);//很右
+        motor_ctrl(FORWORDSPEED - COMPEN - 550,FORWORDSPEED + COMPEN + 550);//很右
         USART1_Print("222");
         outline_flag = -1;
     }
@@ -168,7 +168,7 @@ void auto_trace(void)
             && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_SET
             && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
     {
-        motor_ctrl(FORWORDSPEED - COMPEN - 300,FORWORDSPEED + COMPEN + 300);//偏右
+        motor_ctrl(FORWORDSPEED - COMPEN - 250,FORWORDSPEED + COMPEN + 300);//偏右
         outline_flag = -1;
     }
     else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_RESET
@@ -176,9 +176,9 @@ void auto_trace(void)
             && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
     {
         if(outline_flag == 1)
-            motor_ctrl(FORWORDSPEED - COMPEN + 600,FORWORDSPEED + COMPEN - 600);
+            motor_ctrl(FORWORDSPEED - COMPEN + 500,FORWORDSPEED + COMPEN - 500);
         else if(outline_flag == -1)
-            motor_ctrl(FORWORDSPEED - COMPEN - 600,FORWORDSPEED + COMPEN + 600);
+            motor_ctrl(FORWORDSPEED - COMPEN - 550,FORWORDSPEED + COMPEN + 550);
 
     }
     else
