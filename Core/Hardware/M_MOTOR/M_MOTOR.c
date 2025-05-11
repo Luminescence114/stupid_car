@@ -178,6 +178,8 @@ void auto_trace(void)
             motor_ctrl(FORWORDSPEED - 100 - COMPEN + 500,FORWORDSPEED - 100 + COMPEN - 500);
         else if(outline_flag == -1)
             motor_ctrl(FORWORDSPEED - 100 - COMPEN - 600,FORWORDSPEED - 100 + COMPEN + 600);
+        else
+            motor_ctrl(FORWORDSPEED - COMPEN, FORWORDSPEED + COMPEN);
     }
 //    else
 //    {
