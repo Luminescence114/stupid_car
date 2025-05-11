@@ -8,6 +8,7 @@
 #include "main.h"
 #include "tim.h"
 
+
 int getspeed(char data[DATA_SIZE])
 {
     char temp[3];
@@ -18,45 +19,31 @@ int getspeed(char data[DATA_SIZE])
     return speed;
 }
 
-void motor_ctrl(char dirction[4], int speed)
+void motor_ctrl(int speed_l, int speed_r)
 {
-    if(strcmp(dirction,"goto") == 0){
-        ccr_r = ccr_l = speed;
+    if(speed_l >= 0)
+    {
         HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
+    }
+    else if(speed_l < 0)
+    {
+        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_SET);
+    }
+    if(speed_r >= 0)
+    {
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
     }
-    else if(strcmp(dirction, "back") == 0){
-        ccr_r = ccr_l = speed;
-        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_SET);
+    else if(speed_r < 0)
+    {
         HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_RESET);
         HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_SET);
     }
-    else if(strcmp(dirction, "stop") == 0){
-        ccr_r = ccr_l = 0;
-        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
-    }
-    else if(strcmp(dirction, "left") == 0){
-        ccr_l = speed / 2;
-        ccr_r = speed;
-        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
-    }
-    else if(strcmp(dirction, "righ") == 0){
-        ccr_l = speed;
-        ccr_r = speed / 2;
-        HAL_GPIO_WritePin(GPIOC,GPIO_PIN_11,GPIO_PIN_SET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_0,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_6,GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(GPIOG,GPIO_PIN_9,GPIO_PIN_RESET);
-    }
+    ccr_l = abs(speed_l);
+    ccr_r = abs(speed_r);
+    USART1_Print("%d",ccr_l);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -66,16 +53,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         count++;
         if(count == ccr_l)
         {
-            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_4,GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_4,GPIO_PIN_SET);
+//            USART1_Print("A%d",count);
         }
         else if(count == ccr_r)
         {
-            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_SET);
+//            USART1_Print("B%d",count);
+
         }
         else if (count >= MAXCCR)
         {
-            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_4,GPIO_PIN_SET);
-            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_SET);
+            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_4,GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_RESET);
             count = 0;
         }
     }
@@ -86,45 +76,45 @@ void Avoid_obstacle(void)
     if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_SET)
     {
 
-        motor_ctrl("goto",500);
+        motor_ctrl(500,500);
     }
     else if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
     {
-        motor_ctrl("stop",0);
+        motor_ctrl(0,0);
         HAL_Delay(500);
-        motor_ctrl("back",300);
+        motor_ctrl(-300,-300);
         HAL_Delay(500);
-        motor_ctrl("left",400);
+        motor_ctrl(300,500);
         HAL_Delay(1000);
         if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7) == GPIO_PIN_RESET)
         {
-            motor_ctrl("left",400);
+            motor_ctrl(300,500);
         }
         else
         {
-            motor_ctrl("goto",500);
+            motor_ctrl(500,500);
         }
     }
     if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_2) == GPIO_PIN_SET)
     {
 
-        motor_ctrl("goto",500);
+        motor_ctrl(500,500);
     }
     else if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_2) == GPIO_PIN_RESET)
     {
-        motor_ctrl("stop",0);
+        motor_ctrl(0,0);
         HAL_Delay(500);
-        motor_ctrl("back",400);
+        motor_ctrl(-400,-400);
         HAL_Delay(500);
-        motor_ctrl("righ",400);
+        motor_ctrl(500,300);
         HAL_Delay(1000);
         if(HAL_GPIO_ReadPin(GPIOG,GPIO_PIN_2) == GPIO_PIN_RESET)
         {
-            motor_ctrl("righ",400);
+            motor_ctrl(500,300);
         }
         else
         {
-            motor_ctrl("goto",500);
+            motor_ctrl(500,500);
         }
     }
 }

@@ -6,7 +6,8 @@
 #define MYCAR111_M_MOTOR_H
 #define MAXCCR 1000
 #include "main.h"
-void motor_ctrl(char dirction[4], int speed);
+#include "M_UART.h"
+void motor_ctrl( int speed_l, int speed_r);
 int getspeed(char data[DATA_SIZE]);
 void Avoid_obstacle(void);
 #endif //MYCAR111_M_MOTOR_H

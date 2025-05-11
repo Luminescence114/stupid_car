@@ -29,9 +29,6 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
     info[3] = ReceiveData[3];
     if(strlen(ReceiveData) == 8)
         speed = getspeed(ReceiveData);
-    motor_ctrl(info,speed);
-
-    USART1_Print("%s %d",ReceiveData,speed);
     memset(ReceiveData, 0, sizeof(ReceiveData));
     HAL_UARTEx_ReceiveToIdle_DMA ( &huart1, ReceiveData, DATA_SIZE);
 }

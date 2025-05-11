@@ -67,6 +67,7 @@ CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_MOTOR/M_MOTOR.c.obj: D:/stm32/stm32c
   D:/CLion_Tools/arm-none-eabi/13.3\ rel1/lib/gcc/arm-none-eabi/13.3.1/include/stddef.h \
   D:/CLion_Tools/arm-none-eabi/13.3\ rel1/lib/gcc/arm-none-eabi/13.3.1/include/stdint.h \
   D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_MOTOR/M_MOTOR.h \
+  D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_UART/M_UART.h \
   D:/stm32/stm32cube/projects/myCAR111/Core/Inc/main.h \
   D:/stm32/stm32cube/projects/myCAR111/Core/Inc/stm32f1xx_hal_conf.h \
   D:/stm32/stm32cube/projects/myCAR111/Core/Inc/tim.h \
@@ -121,6 +122,7 @@ CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_UART/M_UART.c.obj: D:/stm32/stm32cub
   D:/CLion_Tools/arm-none-eabi/13.3\ rel1/lib/gcc/arm-none-eabi/13.3.1/include/stddef.h \
   D:/CLion_Tools/arm-none-eabi/13.3\ rel1/lib/gcc/arm-none-eabi/13.3.1/include/stdint.h \
   D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_MOTOR/M_MOTOR.h \
+  D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_UART/M_UART.h \
   D:/stm32/stm32cube/projects/myCAR111/Core/Hardware/M_UART/M_UART.h \
   D:/stm32/stm32cube/projects/myCAR111/Core/Inc/main.h \
   D:/stm32/stm32cube/projects/myCAR111/Core/Inc/stm32f1xx_hal_conf.h \

@@ -39,7 +39,6 @@ void IRIntIsr(void)
     uint8_t j, k, N = 0;
 
     DelayIr(15);  // 延时大约2ms防抖
-    USART1_Print("FUCKFUCKFUCK");
     if (HAL_GPIO_ReadPin(IRIN_GPIO, IRIN_PIN) == GPIO_PIN_SET)
     {
         return;
@@ -118,7 +117,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     if (GPIO_Pin == GPIO_PIN_10)
     {
-        USART1_Print("中断触发！\r\n");
         IRIntIsr();
     }
 
