@@ -37,6 +37,14 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 #define DATA_SIZE 64
+#define FORWORDSPEED 400
+#define COMPEN 22
+typedef enum{
+    control = 1,
+    trace = 2,
+    avoid = 3
+}car_mode;
+extern car_mode Car_Mode;
 extern int speed;
 extern int ccr_l;
 extern int ccr_r;

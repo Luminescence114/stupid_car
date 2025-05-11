@@ -6,6 +6,7 @@
 #include "M_IR.h"
 #include "tim.h"
 #include "M_UART.h"
+#include "M_MOTOR.h"
 
 #define IRIN_PIN GPIO_PIN_10
 #define IRIN_GPIO GPIOD
@@ -104,6 +105,7 @@ void IRIntIsr(void)
         case 0x43: ctrl_comm = COMM_RIGHT; break;
         case 0x40: ctrl_comm = COMM_STOP;  break;
         case 0x45: ctrl_comm = COMM_CHANGE;  break;
+        case 0x47: Car_Mode = avoid; motor_ctrl(0,0);break;
         default: return;
     }
 

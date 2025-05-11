@@ -10,4 +10,5 @@
 void motor_ctrl( int speed_l, int speed_r);
 int getspeed(char data[DATA_SIZE]);
 void Avoid_obstacle(void);
+void auto_trace(void);
 #endif //MYCAR111_M_MOTOR_H

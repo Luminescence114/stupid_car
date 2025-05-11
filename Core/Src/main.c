@@ -39,8 +39,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define FORWORDSPEED 300
-#define COMPEN 22
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -56,8 +55,7 @@ int count = 0;
 int speed = 0;
 int ccr_l = 0;
 int ccr_r = 0;
-int mode_flag =1;
-int outline_flag = 0;
+car_mode Car_Mode = control;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,35 +71,35 @@ void mode_menu(char mode)
     switch (mode)
     {
         case COMM_UP:
-            if(mode_flag == 1)
+            if(Car_Mode == control)
             {
                 motor_ctrl(FORWORDSPEED - COMPEN,FORWORDSPEED + COMPEN);
                 USART1_Print("up");
             }
             break;
         case COMM_DOWN:
-            if(mode_flag == 1)
+            if(Car_Mode == control)
             {
                 motor_ctrl(-(FORWORDSPEED - COMPEN),-(FORWORDSPEED + COMPEN));
                 USART1_Print("down");
             }
             break;
         case COMM_LEFT:
-            if(mode_flag == 1)
+            if(Car_Mode == control)
             {
                 motor_ctrl(FORWORDSPEED - COMPEN + 75,FORWORDSPEED + COMPEN - 75);
                 USART1_Print("left");
             }
             break;
         case COMM_RIGHT:
-            if(mode_flag == 1)
+            if(Car_Mode == control)
             {
                 motor_ctrl(FORWORDSPEED - COMPEN - 75,FORWORDSPEED + COMPEN + 75);
                 USART1_Print("right");
             }
             break;
         case COMM_STOP:
-            if(mode_flag == 1)
+            if(Car_Mode == control)
             {
                 motor_ctrl(0,0);
                 USART1_Print("stop");
@@ -109,19 +107,19 @@ void mode_menu(char mode)
             break;
         case COMM_CHANGE:
             USART1_Print("change");
-            if(mode_flag == 1)
+            if(Car_Mode == control)
             {
-                mode_flag++;
+                Car_Mode++;
                 motor_ctrl(0,0);
             }
-            else if(mode_flag == 2)
+            else if(Car_Mode == trace)
             {
-                mode_flag++;
+                Car_Mode++;
                 motor_ctrl(0,0);
             }
-            else if(mode_flag >= 3)
+            else if(Car_Mode >= avoid)
             {
-                mode_flag = 1;
+                Car_Mode = control;
                 motor_ctrl(0,0);
             }
             break;
@@ -130,62 +128,7 @@ void mode_menu(char mode)
     }
 }
 
-void auto_trace(void)
-{
-    if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_SET
-       && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET
-       && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
-    {
-        motor_ctrl(FORWORDSPEED - COMPEN,FORWORDSPEED + COMPEN);//中间
-        USART1_Print("000");
-        outline_flag = 0;
-    }
-    else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_RESET
-            && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET
-            && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_SET)
-    {
-        motor_ctrl(FORWORDSPEED - COMPEN + 500,FORWORDSPEED + COMPEN - 500);//很左
-        USART1_Print("111");
-        outline_flag = 1;
-    }
-    else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_SET
-            && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET
-            && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_SET)
-    {
-        motor_ctrl(FORWORDSPEED - COMPEN + 250,FORWORDSPEED + COMPEN - 250);//偏左
-        outline_flag = 1;
 
-    }
-    else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_RESET
-            && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_SET
-            && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
-    {
-        motor_ctrl(FORWORDSPEED - COMPEN - 550,FORWORDSPEED + COMPEN + 550);//很右
-        USART1_Print("222");
-        outline_flag = -1;
-    }
-    else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_SET
-            && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_SET
-            && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
-    {
-        motor_ctrl(FORWORDSPEED - COMPEN - 250,FORWORDSPEED + COMPEN + 300);//偏右
-        outline_flag = -1;
-    }
-    else if(HAL_GPIO_ReadPin(TRACE_M_GPIO_Port,TRACE_M_Pin) == GPIO_PIN_RESET
-            && HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET
-            && HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET)
-    {
-        if(outline_flag == 1)
-            motor_ctrl(FORWORDSPEED - COMPEN + 500,FORWORDSPEED + COMPEN - 500);
-        else if(outline_flag == -1)
-            motor_ctrl(FORWORDSPEED - COMPEN - 550,FORWORDSPEED + COMPEN + 550);
-
-    }
-    else
-    {
-        motor_ctrl(0,0);
-    }
-}
 /* USER CODE END 0 */
 
 /**
@@ -235,16 +178,19 @@ int main(void)
       {
           ir_rec_flag = 0;
           mode_menu(ctrl_comm);
+      }
+      if(Car_Mode == control)
+      {
           HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
           HAL_Delay(50);
       }
-      if(mode_flag == 2)
+      if(Car_Mode == trace)
       {
           auto_trace();
           HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
           HAL_Delay(5);
       }
-      else if(mode_flag == 3)
+      else if(Car_Mode == avoid)
       {
           Avoid_obstacle();
           HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
