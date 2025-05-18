@@ -105,11 +105,11 @@ void IRIntIsr(void)
         case 0x43: ctrl_comm = COMM_RIGHT; break;
         case 0x40: ctrl_comm = COMM_STOP;  break;
         case 0x45: ctrl_comm = COMM_CHANGE;  break;
-        case 0x47: Car_Mode = avoid; motor_ctrl(0,0);break;
+        case 0x47: Car_Mode = avoid;motor_ctrl(0,0);break;
         default: return;
     }
 
-    ir_rec_flag = 1; // 标记红外接收完成
+    ir_rec_flag = 1;
 }
 
 /*

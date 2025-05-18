@@ -53,7 +53,6 @@ include_directories(Core/Inc Drivers/STM32F1xx_HAL_Driver/Inc Drivers/STM32F1xx_
         Core/Hardware/M_UART
         Core/Hardware/M_IR
         Core/Hardware/M_MOTOR)
-
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE)
 
 file(GLOB_RECURSE SOURCES "Core/*.*" "Drivers/*.*")

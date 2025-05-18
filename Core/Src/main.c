@@ -66,68 +66,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void mode_menu(char mode)
-{
-    switch (mode)
-    {
-        case COMM_UP:
-            if(Car_Mode == control)
-            {
-                motor_ctrl(FORWORDSPEED - COMPEN,FORWORDSPEED + COMPEN);
-                USART1_Print("up");
-            }
-            break;
-        case COMM_DOWN:
-            if(Car_Mode == control)
-            {
-                motor_ctrl(-(FORWORDSPEED - COMPEN),-(FORWORDSPEED + COMPEN));
-                USART1_Print("down");
-            }
-            break;
-        case COMM_LEFT:
-            if(Car_Mode == control)
-            {
-                motor_ctrl(FORWORDSPEED - COMPEN + 75,FORWORDSPEED + COMPEN - 75);
-                USART1_Print("left");
-            }
-            break;
-        case COMM_RIGHT:
-            if(Car_Mode == control)
-            {
-                motor_ctrl(FORWORDSPEED - COMPEN - 75,FORWORDSPEED + COMPEN + 75);
-                USART1_Print("right");
-            }
-            break;
-        case COMM_STOP:
-            if(Car_Mode == control)
-            {
-                motor_ctrl(0,0);
-                USART1_Print("stop");
-            }
-            break;
-        case COMM_CHANGE:
-            USART1_Print("change");
-            if(Car_Mode == control)
-            {
-                Car_Mode++;
-                motor_ctrl(0,0);
-            }
-            else if(Car_Mode == trace)
-            {
-                Car_Mode++;
-                motor_ctrl(0,0);
-            }
-            else if(Car_Mode >= avoid)
-            {
-                Car_Mode = control;
-                motor_ctrl(0,0);
-            }
-            break;
-        default :
-            break;
-    }
-}
-
 
 /* USER CODE END 0 */
 
@@ -165,7 +103,6 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
-    HAL_UARTEx_ReceiveToIdle_DMA( &huart1, ReceiveData, DATA_SIZE);
     HAL_TIM_Base_Start_IT(&htim7);
 
   /* USER CODE END 2 */
@@ -177,26 +114,25 @@ int main(void)
       if(ir_rec_flag == 1)
       {
           ir_rec_flag = 0;
-          mode_menu(ctrl_comm);
+          control_menu(ctrl_comm);
       }
-      if(Car_Mode == control)
-      {
-          HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-          HAL_Delay(50);
+      switch(Car_Mode){
+          case control:
+              HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
+              HAL_Delay(50);
+              break;
+          case trace:
+              auto_trace();
+              HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
+              HAL_Delay(5);
+              break;
+          case avoid:
+              Avoid_obstacle();
+              HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
+              HAL_Delay(50);
+              break;
+          default:break;
       }
-      if(Car_Mode == trace)
-      {
-          auto_trace();
-          HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-          HAL_Delay(5);
-      }
-      else if(Car_Mode == avoid)
-      {
-          Avoid_obstacle();
-          HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-          HAL_Delay(50);
-      }
-
 
 
     /* USER CODE END WHILE */

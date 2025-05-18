@@ -19,16 +19,3 @@ void USART1_Print(char *fmt, ...)
     va_end(ap);
     HAL_UART_Transmit(&huart1, buf, len, 100);
 }
-
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
-{
-    char info[4];
-    info[0] = ReceiveData[0];
-    info[1] = ReceiveData[1];
-    info[2] = ReceiveData[2];
-    info[3] = ReceiveData[3];
-    if(strlen(ReceiveData) == 8)
-        speed = getspeed(ReceiveData);
-    memset(ReceiveData, 0, sizeof(ReceiveData));
-    HAL_UARTEx_ReceiveToIdle_DMA ( &huart1, ReceiveData, DATA_SIZE);
-}
