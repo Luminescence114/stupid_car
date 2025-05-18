@@ -87,14 +87,14 @@ void control_menu(char mode)
         case COMM_LEFT:
             if(Car_Mode == control)
             {
-                motor_ctrl(FORWORDSPEED - COMPEN + 150,FORWORDSPEED + COMPEN - 150);
+                motor_ctrl(FORWORDSPEED - COMPEN - 150,FORWORDSPEED + COMPEN + 150);
                 USART1_Print("left");
             }
             break;
         case COMM_RIGHT:
             if(Car_Mode == control)
             {
-                motor_ctrl(FORWORDSPEED - COMPEN - 150,FORWORDSPEED + COMPEN + 150);
+                motor_ctrl(FORWORDSPEED - COMPEN + 150,FORWORDSPEED + COMPEN - 150);
                 USART1_Print("right");
             }
             break;
@@ -140,8 +140,8 @@ void avoid_l(void)
     motor_ctrl(300 - COMPEN,300 + COMPEN);
     HAL_Delay(500);
     while(HAL_GPIO_ReadPin(TRACE_L_GPIO_Port,TRACE_L_Pin) == GPIO_PIN_RESET) ;
-    motor_ctrl(500,0);
-    HAL_Delay(200);
+    motor_ctrl(500,-200);
+    HAL_Delay(300);
 
 }
 
@@ -158,8 +158,8 @@ void avoid_r(void)
     motor_ctrl(300 - COMPEN,300 + COMPEN);
     HAL_Delay(500);
     while(HAL_GPIO_ReadPin(TRACE_R_GPIO_Port,TRACE_R_Pin) == GPIO_PIN_RESET) ;
-    motor_ctrl(0,500);
-    HAL_Delay(200);
+    motor_ctrl(-200,500);
+    HAL_Delay(300);
 }
 void Avoid_obstacle(void)
 {

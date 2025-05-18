@@ -111,11 +111,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-      if(ir_rec_flag == 1)
-      {
-          ir_rec_flag = 0;
-          control_menu(ctrl_comm);
-      }
+
       switch(Car_Mode){
           case control:
               HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);

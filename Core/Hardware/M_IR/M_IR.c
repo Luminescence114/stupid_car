@@ -109,7 +109,7 @@ void IRIntIsr(void)
         default: return;
     }
 
-    ir_rec_flag = 1;
+    control_menu(ctrl_comm);
 }
 
 /*
