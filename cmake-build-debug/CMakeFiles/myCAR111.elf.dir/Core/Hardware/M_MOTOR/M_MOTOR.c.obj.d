@@ -54,4 +54,5 @@ CMakeFiles/myCAR111.elf.dir/Core/Hardware/M_MOTOR/M_MOTOR.c.obj: \
  D:\stm32\stm32cube\projects\myCAR111\Drivers\STM32F1xx_HAL_Driver\Inc/stm32f1xx_hal_uart.h \
  D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_UART/M_UART.h \
  D:\stm32\stm32cube\projects\myCAR111\Core\Inc/tim.h \
- D:\stm32\stm32cube\projects\myCAR111\Core\Inc/main.h
+ D:\stm32\stm32cube\projects\myCAR111\Core\Inc/main.h \
+ D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_IR/M_IR.h
