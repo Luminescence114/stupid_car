@@ -58,7 +58,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
             HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_RESET);
 
         }
-        else if (count >= MAXCCR)
+        else if (count >= MAXARR)
         {
             HAL_GPIO_WritePin(GPIOD,GPIO_PIN_4,GPIO_PIN_SET);
             HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_SET);

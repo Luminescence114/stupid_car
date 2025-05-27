@@ -6,7 +6,7 @@
 #define MYCAR111_M_MOTOR_H
 #include "main.h"
 #include "M_UART.h"
-#define MAXCCR 1000
+#define MAXARR 1000
 #define MOTOR_L_GO() \
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_11, GPIO_PIN_SET);\
     HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_RESET)
