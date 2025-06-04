@@ -124,7 +124,7 @@ int main(void)
               HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
               HAL_Delay(50);
               break;
-          default:__NOP();break;
+          default:break;
       }
 
 
