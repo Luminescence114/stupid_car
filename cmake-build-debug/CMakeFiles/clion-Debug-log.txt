@@ -40,6 +40,6 @@ CMake Deprecation Warning:
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Minimal optimization, debug info included
--- Configuring done (2.0s)
+-- Configuring done (8.5s)
 -- Generating done (0.1s)
 -- Build files have been written to: D:/stm32/stm32cube/projects/myCAR111/cmake-build-debug
