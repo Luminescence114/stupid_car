@@ -1,0 +1,11 @@
+cmake-build-debug
+cmake-build-release
+Drivers
+Middlewares
+Core
+*.ld
+.project
+.cproject
+.mxproject
+.idea
+CMakeLists.txt
