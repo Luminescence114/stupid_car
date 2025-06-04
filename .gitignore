@@ -8,5 +8,4 @@ Middlewares
 .mxproject
 .idea
 CMakeLists.txt
-/cmake-build-debug/
-/Drivers/
+
