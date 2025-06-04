@@ -25,10 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stdio.h"
-#include "string.h"
-#include "M_UART.h"
-#include "M_IR.h"
+
 #include "M_MOTOR.h"
 /* USER CODE END Includes */
 

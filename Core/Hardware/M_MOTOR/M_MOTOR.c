@@ -259,14 +259,6 @@ void auto_trace(void)
         else
             motor_ctrl(FORWORDSPEED - COMPEN, FORWORDSPEED + COMPEN);
     }
-//    else
-//    {
-//        timeout_count++;
-//        if(timeout_count >= 20)
-//        {
-//            motor_ctrl(0,0);
-//        }
-//    }
     if(obs[obs_l] == GPIO_PIN_RESET)
     {
         HAL_Delay(10);

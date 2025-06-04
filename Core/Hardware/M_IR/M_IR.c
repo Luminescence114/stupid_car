@@ -2,7 +2,6 @@
 // Created by 董俊乾 on 2025/4/27.
 //
 
-#include <stdint-gcc.h>
 #include "M_IR.h"
 #include "tim.h"
 #include "M_UART.h"

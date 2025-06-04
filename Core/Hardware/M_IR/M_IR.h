@@ -4,6 +4,9 @@
 
 #ifndef MYCAR111_M_IR_H
 #define MYCAR111_M_IR_H
+
+#include <stdint-gcc.h>
+
 void IR_IntHandler(void);
 
 #define COMM_STOP  'I'
