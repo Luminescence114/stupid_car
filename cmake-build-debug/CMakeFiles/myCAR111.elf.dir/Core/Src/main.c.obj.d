@@ -39,23 +39,5 @@ CMakeFiles/myCAR111.elf.dir/Core/Src/main.c.obj: \
  D:\stm32\stm32cube\projects\myCAR111\Core\Inc/tim.h \
  D:\stm32\stm32cube\projects\myCAR111\Core\Inc/usart.h \
  D:\stm32\stm32cube\projects\myCAR111\Core\Inc/gpio.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/stdio.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/_ansi.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/newlib.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/config.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/machine/ieeefp.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/cdefs.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/lib/gcc/arm-none-eabi/13.3.1/include/stdarg.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/reent.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/_ansi.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/_types.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/machine/_types.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/lock.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/stdio.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/string.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/_locale.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/strings.h \
- D:/CLion_Tools/arm-none-eabi/13.3\ rel1/arm-none-eabi/include/sys/string.h \
- D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_UART/M_UART.h \
- D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_IR/M_IR.h \
- D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_MOTOR/M_MOTOR.h
+ D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_MOTOR/M_MOTOR.h \
+ D:\stm32\stm32cube\projects\myCAR111\Core\Hardware\M_UART/M_UART.h
