@@ -49,6 +49,11 @@ else ()
 endif ()
 
 include_directories(${includes})
+include_directories(
+    Core/Hardware/M_UART
+    Core/Hardware/M_IR
+    Core/Hardware/M_MOTOR
+)
 
 add_definitions(${defines})
 
