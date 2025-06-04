@@ -107,7 +107,6 @@ void IRIntIsr(void)
         case 0x47: Car_Mode = avoid;motor_ctrl(0,0);break;
         default: return;
     }
-
     control_menu(ctrl_comm);
 }
 
