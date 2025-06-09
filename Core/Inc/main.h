@@ -36,9 +36,9 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-#define DATA_SIZE 64
-#define FORWORDSPEED 400
-#define COMPEN 22
+#define DATA_SIZE 64 //串口发送最大字节
+#define FORWORDSPEED 400 //前进速度
+#define COMPEN 22 //左右差速补偿
 typedef enum{
     control = 1,
     trace = 2,

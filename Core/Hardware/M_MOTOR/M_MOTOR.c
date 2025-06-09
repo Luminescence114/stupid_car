@@ -222,40 +222,40 @@ void auto_trace(void)
     };
     if(pos[l] == GPIO_PIN_RESET && pos[m] == GPIO_PIN_SET && pos[r] == GPIO_PIN_RESET)
     {
-        motor_ctrl(FORWORDSPEED - 100 - COMPEN,FORWORDSPEED - 100 + COMPEN);//中间
+        motor_ctrl(FORWORDSPEED - COMPEN,FORWORDSPEED + COMPEN);//中间
         outline_flag = timeout_count = 0;
     }
     else if(pos[l] == GPIO_PIN_RESET && pos[m] == GPIO_PIN_RESET && pos[r] == GPIO_PIN_SET)
     {
-        motor_ctrl(FORWORDSPEED - 100 - COMPEN + 500,FORWORDSPEED - 100 + COMPEN - 500);//很左
+        motor_ctrl(FORWORDSPEED - COMPEN + 500,FORWORDSPEED + COMPEN - 500);//很左
         outline_flag = 1;
         timeout_count = 0;
     }
     else if(pos[l] == GPIO_PIN_RESET && pos[m] == GPIO_PIN_SET && pos[r] == GPIO_PIN_SET)
     {
-        motor_ctrl(FORWORDSPEED - 100 - COMPEN + 300,FORWORDSPEED - 100 + COMPEN - 300);//偏左
+        motor_ctrl(FORWORDSPEED - COMPEN + 300,FORWORDSPEED + COMPEN - 300);//偏左
         outline_flag = 1;
         timeout_count = 0;
 
     }
     else if(pos[l] == GPIO_PIN_SET && pos[m] == GPIO_PIN_RESET && pos[r] == GPIO_PIN_RESET)
     {
-        motor_ctrl(FORWORDSPEED - 100 - COMPEN - 600,FORWORDSPEED - 100 + COMPEN + 600);//很右
+        motor_ctrl(FORWORDSPEED - COMPEN - 600,FORWORDSPEED + COMPEN + 600);//很右
         outline_flag = -1;
         timeout_count = 0;
     }
     else if(pos[l] == GPIO_PIN_SET && pos[m] == GPIO_PIN_SET && pos[r] == GPIO_PIN_RESET)
     {
-        motor_ctrl(FORWORDSPEED - 100 - COMPEN - 300,FORWORDSPEED - 100 + COMPEN + 300);//偏右
+        motor_ctrl(FORWORDSPEED - COMPEN - 300,FORWORDSPEED + COMPEN + 300);//偏右
         outline_flag = -1;
         timeout_count = 0;
     }
     else
     {
         if(outline_flag == 1)
-            motor_ctrl(FORWORDSPEED - 100 - COMPEN + 500,FORWORDSPEED - 100 + COMPEN - 500);
+            motor_ctrl(FORWORDSPEED - COMPEN + 500,FORWORDSPEED + COMPEN - 500);
         else if(outline_flag == -1)
-            motor_ctrl(FORWORDSPEED - 100 - COMPEN - 600,FORWORDSPEED - 100 + COMPEN + 600);
+            motor_ctrl(FORWORDSPEED - COMPEN - 600,FORWORDSPEED + COMPEN + 600);
         else
             motor_ctrl(FORWORDSPEED - COMPEN, FORWORDSPEED + COMPEN);
     }
